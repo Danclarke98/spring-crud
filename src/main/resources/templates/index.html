@@ -6,7 +6,27 @@
 </head>
 <body>
 
-<p th:text="'hello, '+ ${user.getFname()}">Hello world.</p>
+
+<table border="1px">
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Password</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">ID</td>
+        <td th:text="${user.fname}">First Name</td>
+        <td th:text="${user.lname}">Last Name</td>
+        <td th:text="${user.password}">Password</td>
+        <!-<td><a href="#" th:href="@{/user/delete/${user.id}}">Delete</a> </td>->
+
+
+    </tr>
+</table>
+
+
 
 </body>
 </html>
