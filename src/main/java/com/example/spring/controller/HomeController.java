@@ -18,7 +18,6 @@ public class HomeController {
     UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-
     public String index(Model model){
 
 

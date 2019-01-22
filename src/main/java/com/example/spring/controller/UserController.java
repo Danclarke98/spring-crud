@@ -5,10 +5,7 @@ import com.example.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -33,6 +30,18 @@ public class UserController {
 
         userService.save(user);
         return "Registration Complete \n" + "Created: " + user.getFname() + " "+ user.getLname();
+
+    }
+    @RequestMapping(value = "/delete/{user}", method = RequestMethod.GET)
+
+    public String delete(@PathVariable User user){
+
+        String name = user.getFname()+ ' ' + user.getLname();
+        userService.delete(user);
+
+        return "redirect:/";
+
+
 
     }
 
