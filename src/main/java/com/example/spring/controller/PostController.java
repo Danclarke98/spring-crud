@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -52,5 +53,29 @@ public class PostController {
         return "redirect:/view";
 
     }
+
+    @RequestMapping(value = "/delete/{post}", method = RequestMethod.GET)
+
+    public String delete(@PathVariable Post post, HttpSession session){
+
+
+
+        if(post.getAuthor().equals(session.getAttribute("author").toString())){
+
+            postService.delete(post);
+
+            return "redirect:/view";
+
+        }
+
+
+
+        return "redirect:/";
+
+
+
+    }
+
+
 
 }

@@ -79,8 +79,6 @@ public class UserController {
 
 
         session.setAttribute("author", user.getUsername());
-
-
         session.setAttribute("login", true);
         return "redirect:/";
 
