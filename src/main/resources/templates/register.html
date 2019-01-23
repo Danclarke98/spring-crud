@@ -8,10 +8,15 @@
 
 <h3>User Registration</h3>
 
+<div th:if="${message != null}">
+    <span th:text="${message}"/>
+
+</div>
+
 <form action ="#" th:action="@{/user/register}" th:object="${user}" method="post">
-    <p>First Name: </p> <input th:type="text" th:field="*{fname}"/>
-    <p>Last Name: </p> <input th:type="text" th:field="*{lname}"/>
-    <p>Password Name: </p> <input th:type="text" th:field="*{password}"/>
+    <input type="hidden" th:field="*{id}"/>
+    <p>Username: </p> <input th:type="text" th:field="*{username}"/>
+    <p>Password: </p> <input th:type="text" th:field="*{password}"/>
 
 
     <input type="submit" value = "Register" />

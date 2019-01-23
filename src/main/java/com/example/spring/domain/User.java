@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class User {
@@ -12,8 +13,9 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    String fname;
-    String lname;
+    @NotEmpty
+    String username;
+    @NotEmpty
     String password;
 
 
@@ -25,21 +27,12 @@ public class User {
         this.id = id;
     }
 
-
-    public String getFname() {
-        return fname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

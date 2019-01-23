@@ -6,15 +6,20 @@
 </head>
 <body>
 
-<h3>User Registration</h3>
+<h3>User Login</h3>
 
-<form action ="#" th:action="@{/user/update}" th:object="${user}" method="post">
+<div th:if="${message != null}">
+    <span th:text="${message}"/>
+
+</div>
+
+<form action ="#" th:action="@{/user/login}" th:object="${user}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <p>Username: </p> <input th:type="text" th:field="*{username}"/>
-    <p>Password Name: </p> <input th:type="text" th:field="*{password}"/>
+    <p>Password: </p> <input th:type="text" th:field="*{password}"/>
 
 
-    <input type="submit" value = "Update" />
+    <input type="submit" value = "Login" />
 
 
 </form>

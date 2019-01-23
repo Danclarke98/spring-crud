@@ -26,4 +26,11 @@ public class UserService {
 
     }
 
+    public List<User> validateLogin(User user){
+
+
+       return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+
+    }
+
 }
