@@ -24,7 +24,7 @@ public class UserController {
         User user = new User();
         model.addAttribute("user", user);
 
-        return "register";
+        return "user/register";
 
     }
 
@@ -37,7 +37,7 @@ public class UserController {
 
             model.addAttribute("user", user);
             model.addAttribute("message", "Please Enter information in each field");
-            return "register";
+            return "user/register";
 
 
         }
@@ -52,7 +52,7 @@ public class UserController {
         User user = new User();
         model.addAttribute("user", user);
 
-        return "login";
+        return "user/login";
 
     }
 
@@ -65,7 +65,7 @@ public class UserController {
 
             model.addAttribute("user", user);
             model.addAttribute("message", "Please Enter information in each field");
-            return "login";
+            return "user/login";
 
 
         }
@@ -73,9 +73,13 @@ public class UserController {
         if(userService.validateLogin(user)==null || userService.validateLogin(user).size()==0){
             model.addAttribute("user", user);
             model.addAttribute("message", "Account does not exist or incorrect");
-            return "login";
+            return "user/login";
 
         }
+
+
+        session.setAttribute("author", user.getUsername());
+
 
         session.setAttribute("login", true);
         return "redirect:/";
@@ -97,7 +101,7 @@ public class UserController {
 
         model.addAttribute("user", user);
 
-        return "update";
+        return "user/update";
 
     }
 

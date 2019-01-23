@@ -33,4 +33,11 @@ public class UserService {
 
     }
 
+    public String getCurrentUsername(User user){
+
+        return  user.getUsername();
+
+
+    }
+
 }

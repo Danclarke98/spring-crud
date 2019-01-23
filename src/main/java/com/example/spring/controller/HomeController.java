@@ -1,6 +1,8 @@
 package com.example.spring.controller;
 
+import com.example.spring.domain.Post;
 import com.example.spring.domain.User;
+import com.example.spring.service.PostService;
 import com.example.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    PostService postService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, HttpSession session){
@@ -34,6 +38,21 @@ public class HomeController {
         model.addAttribute("users", users);
         return "index";
     }
+
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String viewPost(Model model){
+
+        List<Post> posts = postService.findAll();
+
+        model.addAttribute("posts",posts);
+
+
+
+        return "post/viewPost";
+    }
+
+
+
 
 
 }
