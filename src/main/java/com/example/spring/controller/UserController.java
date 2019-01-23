@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -57,7 +58,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
 
-    public String login(Model model, @Valid @ModelAttribute("user") User user, BindingResult bindingResult){
+    public String login(Model model, @Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpSession session){
 
         if(bindingResult.hasErrors()){
 
@@ -76,10 +77,20 @@ public class UserController {
 
         }
 
+        session.setAttribute("login", true);
         return "redirect:/";
 
     }
 
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(Model model, HttpSession session){
+
+        session.removeAttribute("login");
+
+        return "redirect:/user/login";
+
+    }
 
     @RequestMapping(value = "/update/{user}", method = RequestMethod.GET)
     public String updateView(Model model, @PathVariable User user){
