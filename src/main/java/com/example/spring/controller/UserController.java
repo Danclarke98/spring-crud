@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -88,6 +89,13 @@ public class UserController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(Model model, HttpSession session){
 
+        if(session.getAttribute("login")==null){
+
+            return "redirect:/user/login";
+
+        }
+
+
         session.removeAttribute("login");
 
         return "redirect:/user/login";
@@ -95,7 +103,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update/{user}", method = RequestMethod.GET)
-    public String updateView(Model model, @PathVariable User user){
+    public String updateView(Model model, @PathVariable User user, HttpSession session){
+
+        if(session.getAttribute("login")==null){
+
+            return "redirect:/user/login";
+
+        }
 
         model.addAttribute("user", user);
 
@@ -107,25 +121,49 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(Model model, @ModelAttribute User user){
 
+
         userService.save(user);
 
 
-        return "redirect:/";
+        return "redirect:/user/admin";
 
     }
 
 
     @RequestMapping(value = "/delete/{user}", method = RequestMethod.GET)
+    public String delete(@PathVariable User user, HttpSession session){
 
-    public String delete(@PathVariable User user){
+        if(session.getAttribute("login")==null){
+
+            return "redirect:/user/login";
+
+        }
 
         String name = user.getUsername();
         userService.delete(user);
 
-        return "redirect:/";
+        return "redirect:/user/admin";
 
 
 
+    }
+
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String index(Model model, HttpSession session){
+
+        if(session.getAttribute("login")==null){
+
+            return "redirect:/user/login";
+
+
+
+        }
+
+        List<User> users = userService.findAll();
+
+        model.addAttribute("users", users);
+        return "user/admin";
     }
 
 

@@ -29,19 +29,20 @@ public class HomeController {
 
             return "redirect:/user/login";
 
-
-
         }
 
-        List<User> users = userService.findAll();
 
-        model.addAttribute("users", users);
-        return "index";
+        return "redirect:/post/view";
     }
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String viewPost(Model model){
+    @RequestMapping(value = "/post/view", method = RequestMethod.GET)
+    public String viewPost(Model model , HttpSession session){
 
+        if(session.getAttribute("login")==null){
+
+            return "redirect:/user/login";
+
+        }
         List<Post> posts = postService.findAll();
 
         model.addAttribute("posts",posts);

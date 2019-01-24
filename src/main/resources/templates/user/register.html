@@ -2,11 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <th:block th:include="fragments/header :: headerinc"></th:block>
+    <link href="../static/css/bootstrap.min.css"/>
     <title>Register</title>
 </head>
 <body>
 
-<h3>User Registration</h3>
+
+<div th:include="fragments/navbar :: navbarHome"></div>
+
+<h3>Register</h3>
 
 <div th:if="${message != null}">
     <span th:text="${message}"/>

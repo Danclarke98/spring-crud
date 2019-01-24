@@ -31,7 +31,14 @@ public class PostController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createView(Model model){
+    public String createView(Model model,HttpSession session){
+
+        if(session.getAttribute("login")==null){
+
+            return "redirect:/user/login";
+
+        }
+
 
         Post post = new Post();
         model.addAttribute("post",post);
@@ -45,12 +52,14 @@ public class PostController {
 
 
 
+
+
         model.addAttribute("post", post);
 
         post.setAuthor(session.getAttribute("author").toString());
 
         postService.save(post);
-        return "redirect:/view";
+        return "redirect:/post/view";
 
     }
 
@@ -59,18 +68,24 @@ public class PostController {
     public String delete(@PathVariable Post post, HttpSession session){
 
 
+        if(session.getAttribute("login")==null){
+
+            return "redirect:/user/login";
+
+        }
+
 
         if(post.getAuthor().equals(session.getAttribute("author").toString())){
 
             postService.delete(post);
 
-            return "redirect:/view";
+            return "redirect:/post/view";
 
         }
 
 
 
-        return "redirect:/";
+        return "redirect:/post/view";
 
 
 

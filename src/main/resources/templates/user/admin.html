@@ -2,12 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Demo Project</title>
+    <th:block th:include="fragments/header :: headerinc"></th:block>
+    <link href="../static/css/bootstrap.min.css"/>
+
 </head>
 <body>
 
+<div th:include="fragments/navbar :: navbarPost"></div>
 
-<table border="1px">
+
+<div class="container">
+<table class = "table table-striped">
     <tr>
 
         <th>Username</th>
@@ -23,9 +28,10 @@
         <td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a> </td>
 
 
+
     </tr>
 </table>
-
+</div>
 
 
 </body>

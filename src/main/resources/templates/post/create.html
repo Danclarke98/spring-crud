@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <th:block th:include="fragments/header :: headerinc"></th:block>
+    <link href="../static/css/bootstrap.min.css"/>
 </head>
 <body>
 
-<h3>Create Post</h3>
+<div th:include="fragments/navbar :: navbarPost"></div>
 
 <div th:if="${message != null}">
     <span th:text="${message}"/>
@@ -16,14 +17,21 @@
 <form action ="#" th:action="@{/post/create}" th:object="${post}" method="post">
 
     <input type="hidden" th:field="*{id}"/>
-    <p>Title: </p> <input th:type="text" th:field="*{title}"/>
-    <p>Content: </p> <input th:type="text" th:field="*{content}"/>
+    <div class="form-group">
+        <label for="titleInput1">Title</label>
+        <input th:type="text" th:field="*{title}" class="form-control" id="titleInput1" placeholder="Title">
+    </div>
+    <div class="form-group">
+        <label for="textarea1">Content</label>
+        <textarea th:type="text" th:field="*{content}" class="form-control" id="textarea1" rows="3"></textarea>
+    </div>
     <input type="hidden" th:field="*{author}"/>
 
     <input type="submit" value = "Post" />
 
 
 </form>
+
 
 </body>
 </html>
