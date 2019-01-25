@@ -1,7 +1,5 @@
 package com.example.spring.controller;
-import com.example.spring.domain.User;
-import com.example.spring.domain.UserRepo;
-import com.example.spring.domain.Post;
+import com.example.spring.domain.*;
 import com.example.spring.domain.User;
 import com.example.spring.service.PostService;
 import com.example.spring.service.UserService;
@@ -88,6 +86,28 @@ public class PostController {
         return "redirect:/post/view";
 
 
+
+    }
+
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchView(Model model){
+        PostSearchFrom searchFrom = new PostSearchFrom();
+        model.addAttribute("searchCriteria", searchFrom);
+
+        return "/post/search";
+
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String search(Model model, @ModelAttribute("searchCriteria") PostSearchFrom searchFrom){
+
+        List<Post> posts = postService.searchPosts(searchFrom);
+  ;
+        model.addAttribute("searchCriteria", searchFrom);
+        model.addAttribute("posts",posts);
+
+        return "/post/search";
 
     }
 

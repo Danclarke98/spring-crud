@@ -2,6 +2,7 @@ package com.example.spring.service;
 
 import com.example.spring.domain.Post;
 import com.example.spring.domain.PostRepo;
+import com.example.spring.domain.PostSearchFrom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,15 @@ public class PostService {
     }
 
 
+    public List<Post> searchPosts(PostSearchFrom post){
+
+        if(post.getTitle().isEmpty()){
+            return postRepo.findAll();
+        }
+        return postRepo.searchPost(post.getTitle());
+
+
+    }
 
 
 
